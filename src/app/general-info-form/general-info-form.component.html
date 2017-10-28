@@ -199,7 +199,7 @@
 
       <div class="form-group">
         <label for="address">Permanent Address<span *ngIf="!isSummaryMode">*</span></label>
-        <textarea type="text" id="address" name="address" formControlName="address" class="form-control" placeholder="Eg. 66 A, Ovitigamuwa, Puhulwella, Matara."></textarea>
+        <textarea autosize type="text" id="address" name="address" formControlName="address" class="form-control" placeholder="Eg. 66 A, Ovitigamuwa, Puhulwella, Matara."></textarea>
         <span *ngIf="!generalInfoForm.get('address').valid && (generalInfoForm.get('address').touched || isSubmitClicked )" class="help-block">
               <span *ngIf="generalInfoForm.get('address').errors['required']">
                 This Field is required!

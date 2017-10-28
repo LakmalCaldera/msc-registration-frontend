@@ -29,6 +29,8 @@ import { RegistrationsClosedComponent } from './registrations-closed/registratio
 import { PaymentConfirmationFormComponent } from './payment-confirmation-form/payment-confirmation-form.component';
 import { PaymentService } from './payment.service';
 
+import {Autosize} from 'angular2-autosize';
+
 
 
 
@@ -49,7 +51,8 @@ import { PaymentService } from './payment.service';
     RequestErrorComponent,
     PaymentGatewayFormComponent,
     RegistrationsClosedComponent,
-    PaymentConfirmationFormComponent
+    PaymentConfirmationFormComponent,
+    Autosize
   ],
   imports: [
     BrowserModule,

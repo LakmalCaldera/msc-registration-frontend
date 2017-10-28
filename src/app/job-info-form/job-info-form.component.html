@@ -30,7 +30,7 @@
         </div>
         <div class="form-group">
           <label for="officeAddress">Official Address<span *ngIf="!isSummaryMode">*</span></label>
-          <textarea type="text" id="officeAddress" name="officeAddress" formControlName="officeAddress"
+          <textarea autosize type="text" id="officeAddress" name="officeAddress" formControlName="officeAddress"
                     class="form-control" placeholder="Eg. 66 A, Ovitigamuwa, Puhulwella, Matara."></textarea>
           <span
             *ngIf="!jobInfoForm.get('officeAddress').valid && (jobInfoForm.get('officeAddress').touched  || isSubmitClicked)"
@@ -117,7 +117,7 @@
 
         <div class="form-group">
           <label for="jobDesc">Job Description<span *ngIf="!isSummaryMode">*</span></label>
-          <textarea type="text" id="jobDesc" name="jobDesc" formControlName="jobDesc" class="form-control"
+          <textarea autosize type="text" id="jobDesc" name="jobDesc" formControlName="jobDesc" class="form-control"
                     placeholder="Brief description of your work."></textarea>
           <span
             *ngIf="!jobInfoForm.get('jobDesc').valid && (jobInfoForm.get('jobDesc').touched || isSubmitClicked)"

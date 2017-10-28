@@ -40,7 +40,7 @@
         </div>
         <div class="form-group">
           <label for="address">Address<span *ngIf="!isSummaryMode">*</span></label>
-          <textarea type="text" id="address" name="address" formControlName="address" class="form-control"
+          <textarea autosize type="text" id="address" name="address" formControlName="address" class="form-control"
                     placeholder="Eg. 35, Reid Ave, Colombo 07"></textarea>
           <span
             *ngIf="!refereeInfoForm.get('onUniversity.address').valid && (refereeInfoForm.get('onUniversity.address').touched  || isSubmitClicked)"
@@ -170,7 +170,7 @@
 
         <div class="form-group">
           <label for="address">Address<span *ngIf="!isSummaryMode">*</span></label>
-          <textarea type="text" id="address" name="address" formControlName="address" class="form-control"
+          <textarea autosize type="text" id="address" name="address" formControlName="address" class="form-control"
                     placeholder="Eg. 66 A, Ovitigamuwa, Puhulwella, Matara."></textarea>
           <span
             *ngIf="!refereeInfoForm.get('onEmployment.address').valid && (refereeInfoForm.get('onEmployment.address').touched  || isSubmitClicked)"
