@@ -1,0 +1,182 @@
+
+export interface SystemConfigResponse {
+  registration_open_from:string,
+  registration_open_to:string,
+  payment_redirect_url:string
+}
+
+export interface LoginInfo {
+  nic:string
+}
+
+export interface GeneralInfo {
+  firstProgram:string,
+  secondProgram:string,
+  thirdProgram:string,
+  title:string,
+  fullName:string,
+  gender:string,
+  dob:string,
+  email:string,
+  nic:string,
+  mobileno:string,
+  homeno:string,
+  address:string,
+  name_with_initial:string
+}
+;
+
+export interface EducationInfo {
+  degrees:{
+    id:number,
+    degTitle:string,
+    uni:string,
+    yoa:string,
+    gpa:string,
+    dateEntered:string,
+    dateLeft:string
+  }[],
+  otherQualifications:{
+    id:number,
+    otherQTitle:string,
+    orgTitle:string,
+    doa:string,
+    duration:string
+  }[]
+}
+;
+
+export interface JobInfo {
+  designation:string,
+  workPlace:string,
+  officeAddress:string,
+  workPlaceEmail:string,
+  officeMobile:string,
+  officePhone:string,
+  jobDesc:string,
+  addrStatus:string,
+  workPlaces:{
+    id:number,
+    designation:string,
+    workPlaceOrEmployer:string,
+    frmDate:string,
+    toDate:string
+  }[]
+}
+;
+
+export interface RefereeInfo {
+  onUniversity:{
+    id:number,
+    name:string,
+    designation:string,
+    workPlace:string,
+    address:string,
+    workPlaceEmail:string,
+    mobile:string,
+    officePhone:string,
+    type:string
+  },
+  onEmployment:{
+    id:number,
+    name:string,
+    designation:string,
+    workPlace:string,
+    address:string,
+    workPlaceEmail:string,
+    mobile:string,
+    officePhone:string,
+    type:string
+  },
+  allInfoVerified:boolean
+}
+;
+
+export interface RegistrationResponse {
+  student_id:number,
+  hash:string,
+  year:number,
+  full_name:string,
+  name_with_initial:string,
+  title:string,
+  gender:string,
+  dob:string,
+  email:string,
+  national_id_or_passport:string,
+  mobile_no:string,
+  home_no:string,
+  application_id:number,
+  personal_address:string,
+  deferred:string,
+  country:string,
+  confirmed:boolean,
+  student_education:{
+    id:number,
+    student_id:number,
+    degree_title:string,
+    university:string,
+    year_of_award:string,
+    class_or_gpa:string,
+    date_entered:string,
+    date_left:string,
+    degree_no:string
+  }[],
+  student_current_employment:{
+    id:number,
+    student_id:number,
+    designation:string,
+    organization:string,
+    address:string,
+    email:string,
+    office_mobile:string,
+    office_phone:string,
+    job_description:string,
+    correspondent_address:string
+  },
+  student_employment_record:{
+    id:number,
+    student_id:number,
+    designation:string,
+    workp_or_emp:string,
+    from_date:string,
+    end_date:string,
+    emr_id:string
+  }[],
+  student_master:{
+    id:number,
+    student_id:number,
+    degree_category:string,
+    subject_test_result:string,
+    aptitude_test_result:string,
+    payment_transaction_id: number,
+    payment_amount: number,
+    registration_payment_date: number,
+    registration_payment_status:string,
+    first_degree_preference:string,
+    second_degree_preference:string,
+    third_degree_preference:string
+  },
+  student_referee:{
+    id:number,
+    student_id:number,
+    name:string,
+    designation:string,
+    organization:string,
+    address:string,
+    organization_email:string,
+    mobile:string,
+    phone:string,
+    ref_id:string,
+    type:string
+  }[],
+  student_other_qualification:[
+    {
+      id:number,
+      student_id:number,
+      qualif_or_cert:string,
+      inst_or_org:string,
+      date_of_award:string,
+      duration:string
+    }
+    ]
+}

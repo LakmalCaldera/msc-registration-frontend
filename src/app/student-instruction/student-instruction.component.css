@@ -1,0 +1,12 @@
+.text-step{
+  text-decoration: underline;
+}
+
+div {
+  text-align: justify !important;
+}
+
+section{
+  padding: 0 1em;
+  font-family: sans-serif;
+}

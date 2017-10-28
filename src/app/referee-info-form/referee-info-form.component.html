@@ -1,0 +1,286 @@
+<form [formGroup]="refereeInfoForm" (ngSubmit)="onSubmit()">
+
+  <app-common-header headerTitle="Referees" [removeDetail]="removeDetail"></app-common-header>
+
+  <section formGroupName="onUniversity">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <span>1) Academic:</span>
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+          <label for="name">Name<span *ngIf="!isSummaryMode">*</span></label>
+          <input type="text" id="name" name="name" formControlName="name" class="form-control"
+                 placeholder="Eg. VERANGA SOORIYABANDARA PALLAWELA"/>
+          <span
+            *ngIf="!refereeInfoForm.get('onUniversity.name').valid && (refereeInfoForm.get('onUniversity.name').touched  || isSubmitClicked)"
+            class="help-block">
+                This Field is required!
+            </span>
+        </div>
+        <div class="form-group">
+          <label for="designation">Designation<span *ngIf="!isSummaryMode">*</span></label>
+          <input type="text" id="designation" name="designation" formControlName="designation" class="form-control"
+                 placeholder="Eg. Senior Lecturer"/>
+          <span
+            *ngIf="!refereeInfoForm.get('onUniversity.designation').valid && (refereeInfoForm.get('onUniversity.designation').touched  || isSubmitClicked)"
+            class="help-block">
+                This Field is required!
+            </span>
+        </div>
+        <div class="form-group">
+          <label for="workPlace">Work Place<span *ngIf="!isSummaryMode">*</span></label>
+          <input type="text" id="workPlace" name="workPlace" formControlName="workPlace" class="form-control"
+                 placeholder="Eg. University of Colombo School of Computing"/>
+          <span
+            *ngIf="!refereeInfoForm.get('onUniversity.workPlace').valid && (refereeInfoForm.get('onUniversity.workPlace').touched  || isSubmitClicked)"
+            class="help-block">
+                This Field is required!
+            </span>
+        </div>
+        <div class="form-group">
+          <label for="address">Address<span *ngIf="!isSummaryMode">*</span></label>
+          <textarea type="text" id="address" name="address" formControlName="address" class="form-control"
+                    placeholder="Eg. 35, Reid Ave, Colombo 07"></textarea>
+          <span
+            *ngIf="!refereeInfoForm.get('onUniversity.address').valid && (refereeInfoForm.get('onUniversity.address').touched  || isSubmitClicked)"
+            class="help-block">
+                This Field is required!
+            </span>
+        </div>
+
+        <div class="form-group">
+          <label for="workPlaceEmail">Email<span *ngIf="!isSummaryMode">*</span></label>
+          <input type="text" id="workPlaceEmail" name="workPlaceEmail" formControlName="workPlaceEmail"
+                 class="form-control" placeholder="Eg. sooriyabandara@gmail.com"/>
+          <span
+            *ngIf="!refereeInfoForm.get('onUniversity.workPlaceEmail').valid && (refereeInfoForm.get('onUniversity.workPlaceEmail').touched || isSubmitClicked)"
+            class="help-block">
+              <span *ngIf="refereeInfoForm.get('onUniversity.workPlaceEmail').errors['required']">
+                This Field is required!
+              </span>
+              <span
+                *ngIf="!refereeInfoForm.get('onUniversity.workPlaceEmail').errors['required'] && refereeInfoForm.get('onUniversity.workPlaceEmail').errors['email']">
+                Please enter a valid email address!
+              </span>
+            </span>
+        </div>
+
+        <div class="form-group">
+          <label for="mobile">Mobile Number<span *ngIf="!isSummaryMode">*</span></label>
+          <input type="text" id="mobile" name="mobile" formControlName="mobile" class="form-control"
+                 placeholder="Eg. 0715478524"/>
+          <span
+            *ngIf="!refereeInfoForm.get('onUniversity.mobile').valid && (refereeInfoForm.get('onUniversity.mobile').touched || isSubmitClicked)"
+            class="help-block">
+              <span *ngIf="refereeInfoForm.get('onUniversity.mobile').errors['required']">
+                This Field is required!
+              </span>
+                <span *ngIf="!refereeInfoForm.get('onUniversity.mobile').errors['required']
+                            && refereeInfoForm.get('onUniversity.mobile').errors['alphaNumeric']">
+                  Please enter numbers only!
+                </span>
+                <span *ngIf="!refereeInfoForm.get('onUniversity.mobile').errors['required']
+                            && !refereeInfoForm.get('onUniversity.mobile').errors['alphaNumeric']
+                            && refereeInfoForm.get('onUniversity.mobile').errors['lessThanMin']">
+                  Please enter at least 10 characters.
+                </span>
+                <span *ngIf="!refereeInfoForm.get('onUniversity.mobile').errors['required']
+                            && !refereeInfoForm.get('onUniversity.mobile').errors['alphaNumeric']
+                            && !refereeInfoForm.get('onUniversity.mobile').errors['lessThanMin']
+                            && refereeInfoForm.get('onUniversity.mobile').errors['exceedMax']">
+                  Please enter no more than 10 characters.
+                </span>
+            </span>
+        </div>
+
+
+        <div class="form-group">
+          <label for="officePhone">Fixed Line Number<span *ngIf="!isSummaryMode">*</span></label>
+          <input type="text" id="officePhone" name="officePhone" formControlName="officePhone" class="form-control"
+                 placeholder="Eg. 0472255755"/>
+          <span
+            *ngIf="!refereeInfoForm.get('onUniversity.officePhone').valid && (refereeInfoForm.get('onUniversity.officePhone').touched || isSubmitClicked)"
+            class="help-block">
+              <span *ngIf="refereeInfoForm.get('onUniversity.officePhone').errors['required']">
+                This Field is required!
+              </span>
+                <span *ngIf="!refereeInfoForm.get('onUniversity.officePhone').errors['required']
+                            && refereeInfoForm.get('onUniversity.officePhone').errors['alphaNumeric']">
+                  Please enter numbers only!
+                </span>
+                <span *ngIf="!refereeInfoForm.get('onUniversity.officePhone').errors['required']
+                            && !refereeInfoForm.get('onUniversity.officePhone').errors['alphaNumeric']
+                            && refereeInfoForm.get('onUniversity.officePhone').errors['lessThanMin']">
+                  Please enter at least 10 characters.
+                </span>
+                <span *ngIf="!refereeInfoForm.get('onUniversity.officePhone').errors['required']
+                            && !refereeInfoForm.get('onUniversity.officePhone').errors['alphaNumeric']
+                            && !refereeInfoForm.get('onUniversity.officePhone').errors['lessThanMin']
+                            && refereeInfoForm.get('onUniversity.officePhone').errors['exceedMax']">
+                  Please enter no more than 10 characters.
+                </span>
+            </span>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section formGroupName="onEmployment">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <span>2) Professional:</span>
+      </div>
+      <div class="panel-body">
+
+        <div class="form-group">
+          <label for="name">Name<span *ngIf="!isSummaryMode">*</span></label>
+          <input type="text" id="name" name="name" formControlName="name" class="form-control"
+                 placeholder="Eg. Issuru Jayawardena"/>
+          <span
+            *ngIf="!refereeInfoForm.get('onEmployment.name').valid && (refereeInfoForm.get('onEmployment.name').touched  || isSubmitClicked)"
+            class="help-block">
+                This Field is required!
+            </span>
+        </div>
+
+        <div class="form-group">
+          <label for="designation">Designation<span *ngIf="!isSummaryMode">*</span></label>
+          <input type="text" id="designation" name="designation" formControlName="designation" class="form-control"
+                 placeholder="Eg. Senior Software Engineer"/>
+          <span
+            *ngIf="!refereeInfoForm.get('onEmployment.designation').valid && (refereeInfoForm.get('onEmployment.designation').touched  || isSubmitClicked)"
+            class="help-block">
+                This Field is required!
+            </span>
+        </div>
+
+        <div class="form-group">
+          <label for="workPlace">Work Place<span *ngIf="!isSummaryMode">*</span></label>
+          <input type="text" id="workPlace" name="workPlace" formControlName="workPlace" class="form-control"
+                 placeholder="Eg. Score Lab"/>
+          <span
+            *ngIf="!refereeInfoForm.get('onEmployment.workPlace').valid && (refereeInfoForm.get('onEmployment.workPlace').touched  || isSubmitClicked)"
+            class="help-block">
+                This Field is required!
+            </span>
+        </div>
+
+        <div class="form-group">
+          <label for="address">Address<span *ngIf="!isSummaryMode">*</span></label>
+          <textarea type="text" id="address" name="address" formControlName="address" class="form-control"
+                    placeholder="Eg. 66 A, Ovitigamuwa, Puhulwella, Matara."></textarea>
+          <span
+            *ngIf="!refereeInfoForm.get('onEmployment.address').valid && (refereeInfoForm.get('onEmployment.address').touched  || isSubmitClicked)"
+            class="help-block">
+                This Field is required!
+            </span>
+        </div>
+
+        <div class="form-group">
+          <label for="workPlaceEmail">Email<span *ngIf="!isSummaryMode">*</span></label>
+          <input type="text" id="workPlaceEmail" name="workPlaceEmail" formControlName="workPlaceEmail"
+                 class="form-control" placeholder="Eg. issuru@scorelabl.com"/>
+          <span
+            *ngIf="!refereeInfoForm.get('onEmployment.workPlaceEmail').valid && (refereeInfoForm.get('onEmployment.workPlaceEmail').touched || isSubmitClicked)"
+            class="help-block">
+              <span *ngIf="refereeInfoForm.get('onEmployment.workPlaceEmail').errors['required']">
+                This Field is required!
+              </span>
+              <span
+                *ngIf="!refereeInfoForm.get('onEmployment.workPlaceEmail').errors['required'] && refereeInfoForm.get('onEmployment.workPlaceEmail').errors['email']">
+                Please enter a valid email address!
+              </span>
+            </span>
+        </div>
+
+        <div class="form-group">
+          <label for="mobile">Mobile Number<span *ngIf="!isSummaryMode">*</span></label>
+          <input type="text" id="mobile" name="mobile" formControlName="mobile" class="form-control"
+                 placeholder="Eg. 0715478524"/>
+          <span
+            *ngIf="!refereeInfoForm.get('onEmployment.mobile').valid && (refereeInfoForm.get('onEmployment.mobile').touched || isSubmitClicked)"
+            class="help-block">
+              <span *ngIf="refereeInfoForm.get('onEmployment.mobile').errors['required']">
+                This Field is required!
+              </span>
+                <span *ngIf="!refereeInfoForm.get('onEmployment.mobile').errors['required']
+                            && refereeInfoForm.get('onEmployment.mobile').errors['alphaNumeric']">
+                  Please enter numbers only!
+                </span>
+                <span *ngIf="!refereeInfoForm.get('onEmployment.mobile').errors['required']
+                            && !refereeInfoForm.get('onEmployment.mobile').errors['alphaNumeric']
+                            && refereeInfoForm.get('onEmployment.mobile').errors['lessThanMin']">
+                  Please enter at least 10 characters.
+                </span>
+                <span *ngIf="!refereeInfoForm.get('onEmployment.mobile').errors['required']
+                            && !refereeInfoForm.get('onEmployment.mobile').errors['alphaNumeric']
+                            && !refereeInfoForm.get('onEmployment.mobile').errors['lessThanMin']
+                            && refereeInfoForm.get('onEmployment.mobile').errors['exceedMax']">
+                  Please enter no more than 10 characters.
+                </span>
+            </span>
+        </div>
+
+
+        <div class="form-group">
+          <label for="officePhone">Fixed Line Number<span *ngIf="!isSummaryMode">*</span></label>
+          <input type="text" id="officePhone" name="officePhone" formControlName="officePhone" class="form-control"
+                 placeholder="Eg. 0472255755"/>
+          <span
+            *ngIf="!refereeInfoForm.get('onEmployment.officePhone').valid && (refereeInfoForm.get('onEmployment.officePhone').touched || isSubmitClicked)"
+            class="help-block">
+              <span *ngIf="refereeInfoForm.get('onEmployment.officePhone').errors['required']">
+                This Field is required!
+              </span>
+                <span *ngIf="!refereeInfoForm.get('onEmployment.officePhone').errors['required']
+                            && refereeInfoForm.get('onEmployment.officePhone').errors['alphaNumeric']">
+                  Please enter numbers only!
+                </span>
+                <span *ngIf="!refereeInfoForm.get('onEmployment.officePhone').errors['required']
+                            && !refereeInfoForm.get('onEmployment.officePhone').errors['alphaNumeric']
+                            && refereeInfoForm.get('onEmployment.officePhone').errors['lessThanMin']">
+                  Please enter at least 10 characters.
+                </span>
+                <span *ngIf="!refereeInfoForm.get('onEmployment.officePhone').errors['required']
+                            && !refereeInfoForm.get('onEmployment.officePhone').errors['alphaNumeric']
+                            && !refereeInfoForm.get('onEmployment.officePhone').errors['lessThanMin']
+                            && refereeInfoForm.get('onEmployment.officePhone').errors['exceedMax']">
+                  Please enter no more than 10 characters.
+                </span>
+            </span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div *ngIf="isSummaryMode" class="print">
+      <br>
+      <br>
+      <br>
+      <strong>NOTE:</strong>
+      You will be required to submit the above referee reports only when you are called for the interview
+    </div>
+
+
+  </section>
+
+  <div *ngIf="!isSummaryMode">
+    <hr>
+    <div class="form-btm-btns">
+      <div>
+        <button class="btn btn-success" type="button" (click)="onBack()">Previous</button>
+      </div>
+      <div>
+        4/4
+      </div>
+      <div>
+        <button class="btn btn-success pull-right" type="submit" [disabled]="isSubmitClicked">Submit</button>
+      </div>
+    </div>
+    <br>
+  </div>
+</form>

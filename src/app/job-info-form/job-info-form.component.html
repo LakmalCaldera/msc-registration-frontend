@@ -1,0 +1,224 @@
+<form [formGroup]="jobInfoForm" (ngSubmit)="onSubmit()">
+
+  <app-common-header [removeDetail]="removeDetail" headerTitle="Work Experience"></app-common-header>
+
+  <section>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <span>Information About Your Current Job:</span>
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+          <label for="designation">Designation<span *ngIf="!isSummaryMode">*</span></label>
+          <input type="text" id="designation" name="designation" formControlName="designation" class="form-control"
+                 placeholder="Eg. Software Engineer"/>
+          <span
+            *ngIf="!jobInfoForm.get('designation').valid && (jobInfoForm.get('designation').touched  || isSubmitClicked)"
+            class="help-block">
+                This Field is required!
+            </span>
+        </div>
+        <div class="form-group">
+          <label for="workPlace">Place of Work<span *ngIf="!isSummaryMode">*</span></label>
+          <input type="text" id="workPlace" name="workPlace" formControlName="workPlace" class="form-control"
+                 placeholder="Eg. Score Lab"/>
+          <span
+            *ngIf="!jobInfoForm.get('workPlace').valid && (jobInfoForm.get('workPlace').touched  || isSubmitClicked)"
+            class="help-block">
+                This Field is required!
+            </span>
+        </div>
+        <div class="form-group">
+          <label for="officeAddress">Official Address<span *ngIf="!isSummaryMode">*</span></label>
+          <textarea type="text" id="officeAddress" name="officeAddress" formControlName="officeAddress"
+                    class="form-control" placeholder="Eg. 66 A, Ovitigamuwa, Puhulwella, Matara."></textarea>
+          <span
+            *ngIf="!jobInfoForm.get('officeAddress').valid && (jobInfoForm.get('officeAddress').touched  || isSubmitClicked)"
+            class="help-block">
+                This Field is required!
+            </span>
+        </div>
+
+        <div class="form-group">
+          <label for="workPlaceEmail">Email<span *ngIf="!isSummaryMode">*</span></label>
+          <input type="text" id="workPlaceEmail" name="workPlaceEmail" formControlName="workPlaceEmail"
+                 class="form-control" placeholder="Eg. sooriyabandara@gmail.com"/>
+          <span
+            *ngIf="!jobInfoForm.get('workPlaceEmail').valid && (jobInfoForm.get('workPlaceEmail').touched || isSubmitClicked)"
+            class="help-block">
+              <span *ngIf="jobInfoForm.get('workPlaceEmail').errors['required']">
+                This Field is required!
+              </span>
+              <span
+                *ngIf="!jobInfoForm.get('workPlaceEmail').errors['required'] && jobInfoForm.get('workPlaceEmail').errors['email']">
+                Please enter a valid email address!
+              </span>
+            </span>
+        </div>
+
+        <div class="form-group">
+          <label for="officeMobile">Mobile Number<span *ngIf="!isSummaryMode">*</span></label>
+          <input type="text" id="officeMobile" name="officeMobile" formControlName="officeMobile" class="form-control"
+                 placeholder="Eg. 0715478524"/>
+          <span
+            *ngIf="!jobInfoForm.get('officeMobile').valid && (jobInfoForm.get('officeMobile').touched  || isSubmitClicked)"
+            class="help-block">
+              <span *ngIf="jobInfoForm.get('officeMobile').errors['required']">
+                This Field is required!
+              </span>
+                <span *ngIf="!jobInfoForm.get('officeMobile').errors['required']
+                            && jobInfoForm.get('officeMobile').errors['alphaNumeric']">
+                  Please enter numbers only!
+                </span>
+                <span *ngIf="!jobInfoForm.get('officeMobile').errors['required']
+                            && !jobInfoForm.get('officeMobile').errors['alphaNumeric']
+                            && jobInfoForm.get('officeMobile').errors['lessThanMin']">
+                  Please enter at least 10 characters.
+                </span>
+                <span *ngIf="!jobInfoForm.get('officeMobile').errors['required']
+                            && !jobInfoForm.get('officeMobile').errors['alphaNumeric']
+                            && !jobInfoForm.get('officeMobile').errors['lessThanMin']
+                            && jobInfoForm.get('officeMobile').errors['exceedMax']">
+                  Please enter no more than 10 characters.
+                </span>
+            </span>
+        </div>
+
+
+        <div class="form-group">
+          <label for="officePhone">Fixed Line Number<span *ngIf="!isSummaryMode">*</span></label>
+          <input type="text" id="officePhone" name="officePhone" formControlName="officePhone" class="form-control"
+                 placeholder="Eg. 0472255755"/>
+          <span
+            *ngIf="!jobInfoForm.get('officePhone').valid && (jobInfoForm.get('officePhone').touched || isSubmitClicked)"
+            class="help-block">
+              <span *ngIf="jobInfoForm.get('officePhone').errors['required']">
+                This Field is required!
+              </span>
+
+                <span *ngIf="!jobInfoForm.get('officePhone').errors['required']
+                            && jobInfoForm.get('officePhone').errors['alphaNumeric']">
+                  Please enter numbers only!
+                </span>
+                <span *ngIf="!jobInfoForm.get('officePhone').errors['required']
+                            && !jobInfoForm.get('officePhone').errors['alphaNumeric']
+                            && jobInfoForm.get('officePhone').errors['lessThanMin']">
+                  Please enter at least 10 characters.
+                </span>
+                <span *ngIf="!jobInfoForm.get('officePhone').errors['required']
+                            && !jobInfoForm.get('officePhone').errors['alphaNumeric']
+                            && !jobInfoForm.get('officePhone').errors['lessThanMin']
+                            && jobInfoForm.get('officePhone').errors['exceedMax']">
+                  Please enter no more than 10 characters.
+                </span>
+            </span>
+        </div>
+
+
+        <div class="form-group">
+          <label for="jobDesc">Job Description<span *ngIf="!isSummaryMode">*</span></label>
+          <textarea type="text" id="jobDesc" name="jobDesc" formControlName="jobDesc" class="form-control"
+                    placeholder="Brief description of your work."></textarea>
+          <span
+            *ngIf="!jobInfoForm.get('jobDesc').valid && (jobInfoForm.get('jobDesc').touched || isSubmitClicked)"
+            class="help-block">
+                This Field is required!
+            </span>
+        </div>
+
+        <div class="form-group">
+          <label for="addrStatus">Correspondent Address<span *ngIf="!isSummaryMode">*</span></label>
+          <select id="addrStatus" class="form-control" name="addrStatus" formControlName="addrStatus">
+            <option *ngFor="let addrStatus of addrStatuses; let i = index" value="{{addrStatus.value}}">
+              {{addrStatus.text}}
+            </option>
+          </select>
+          <span
+            *ngIf="!jobInfoForm.get('addrStatus').valid && (jobInfoForm.get('addrStatus').touched || isSubmitClicked)"
+            class="help-block">
+              <span *ngIf="jobInfoForm.get('addrStatus').errors['invalidSelection']">You must make a selection!</span>
+            </span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <h3>Employment Records</h3>
+  <hr>
+  <section formArrayName="workPlaces">
+    <div *ngFor="let workPlace of jobInfoForm['controls'].workPlaces['controls']; let i=index"
+         class="panel panel-default">
+      <div class="panel-heading">
+        <span>{{i + 1}}) Previous Work Place</span>
+        <span class="glyphicon glyphicon-remove pull-right" (click)="removeWorkplace(i)" *ngIf="!isSummaryMode"></span>
+      </div>
+      <div class="panel-body" [formGroupName]="i">
+        <div class="form-group">
+          <label for="designation">Designation<span *ngIf="!isSummaryMode">*</span></label>
+          <input type="text" id="designation" name="designation" formControlName="designation" class="form-control"
+                 placeholder="Eg. Software Engineer"/>
+          <span
+            *ngIf="!jobInfoForm.get('workPlaces')['controls'][i]['controls'].designation.valid && (jobInfoForm.get('workPlaces')['controls'][i]['controls'].designation.touched  || isSubmitClicked)"
+            class="help-block">
+                This Field is required!
+            </span>
+        </div>
+        <div class="form-group">
+          <label for="workPlaceOrEmployer">Work Place/Employer<span *ngIf="!isSummaryMode">*</span></label>
+          <input type="text" id="workPlaceOrEmployer" name="workPlaceOrEmployer" formControlName="workPlaceOrEmployer"
+                 class="form-control" placeholder="Eg. Mark Zuckerberg"/>
+          <span
+            *ngIf="!jobInfoForm.get('workPlaces')['controls'][i]['controls'].workPlaceOrEmployer.valid && (jobInfoForm.get('workPlaces')['controls'][i]['controls'].workPlaceOrEmployer.touched  || isSubmitClicked)"
+            class="help-block">
+                This Field is required!
+            </span>
+        </div>
+        <div class="form-group">
+          <label for="frmDate">From Date<span *ngIf="!isSummaryMode">*</span></label>
+          <input type="date" [max]="jobInfoForm.get('workPlaces')['controls'][i]['controls'].toDate.value" id="frmDate"
+                 name="frmDate" formControlName="frmDate" class="form-control" placeholder="YYYY-MM-DD"/>
+          <span
+            *ngIf="!jobInfoForm.get('workPlaces')['controls'][i]['controls'].frmDate.valid && (jobInfoForm.get('workPlaces')['controls'][i]['controls'].frmDate.touched  || isSubmitClicked)"
+            class="help-block">
+                This Field is required!
+            </span>
+        </div>
+        <div class="form-group">
+          <label for="toDate">To Date<span *ngIf="!isSummaryMode">*</span></label>
+          <input type="date" [min]="jobInfoForm.get('workPlaces')['controls'][i]['controls'].frmDate.value" id="toDate"
+                 name="toDate" formControlName="toDate" class="form-control" placeholder="YYYY-MM-DD"/>
+          <span
+            *ngIf="!jobInfoForm.get('workPlaces')['controls'][i]['controls'].toDate.valid && (jobInfoForm.get('workPlaces')['controls'][i]['controls'].toDate.touched  || isSubmitClicked)"
+            class="help-block">
+                This Field is required!
+            </span>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div *ngIf="!isSummaryMode">
+      <button
+        class="btn btn-default"
+        type="button"
+        (click)="addWorkplace()">Add Work Place
+      </button>
+      &nbsp;<span class="help__text">&lt;-&nbsp;Click here to add a previous workplace</span>
+    </div>
+  </section>
+  <div *ngIf="!isSummaryMode">
+    <hr>
+    <div class="form-btm-btns">
+      <div>
+        <button class="btn btn-success" type="button" (click)="onBack()">Previous</button>
+      </div>
+      <div>3/4</div>
+      <div>
+        <button class="btn btn-success pull-right" type="submit">Next</button>
+      </div>
+    </div>
+    <br>
+  </div>
+</form>

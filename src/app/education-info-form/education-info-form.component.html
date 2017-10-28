@@ -1,0 +1,195 @@
+<form [formGroup]="educationInfoForm" (ngSubmit)="onSubmit()">
+
+  <app-common-header headerTitle="Education Qualifications" [removeDetail]="removeDetail"></app-common-header>
+
+  <section formArrayName="degrees">
+    <div *ngFor="let address of educationInfoForm['controls'].degrees['controls']; let i=index"
+         class="panel panel-default">
+      <div class="panel-heading">
+        <span>{{i+1}}) University Education (Undergraduate/Postgraduate Degree)</span>
+        <span class="glyphicon glyphicon-remove pull-right"
+              *ngIf="!isSummaryMode && educationInfoForm['controls'].degrees['controls'].length > 1"
+              (click)="removeDegree(i)"></span>
+      </div>
+      <div class="panel-body" [formGroupName]="i">
+        <div class="form-group">
+          <label for="degTitle">Degree Title<span *ngIf="!isSummaryMode">*</span></label>
+          <input type="text" id="degTitle" name="degTitle" formControlName="degTitle" class="form-control"
+                 placeholder="Eg. Bachelor of Science Special in Chemistry"/>
+          <span
+            *ngIf="!educationInfoForm.get('degrees')['controls'][i]['controls'].degTitle.valid && (educationInfoForm.get('degrees')['controls'][i]['controls'].degTitle.touched  || isSubmitClicked)"
+            class="help-block">
+                This Field is required!
+            </span>
+        </div>
+        <div class="form-group">
+          <label for="uni">University Name<span *ngIf="!isSummaryMode">*</span></label>
+          <input type="text" id="uni" name="uni" formControlName="uni" class="form-control"
+                 placeholder="Eg. University of Colombo"/>
+          <span
+            *ngIf="!educationInfoForm.get('degrees')['controls'][i]['controls'].uni.valid && (educationInfoForm.get('degrees')['controls'][i]['controls'].uni.touched || isSubmitClicked)"
+            class="help-block">
+                This Field is required!
+            </span>
+        </div>
+
+        <div class="form-group">
+          <label for="yoa">Year Awarded<span *ngIf="!isSummaryMode">*</span></label>
+          <input type="text" id="yoa" name="yoa" formControlName="yoa" class="form-control" placeholder="Eg. 2009"/>
+          <span
+            *ngIf="!educationInfoForm.get('degrees')['controls'][i]['controls'].yoa.valid && (educationInfoForm.get('degrees')['controls'][i]['controls'].yoa.touched || isSubmitClicked)"
+            class="help-block">
+              <span *ngIf="educationInfoForm.get('degrees')['controls'][i]['controls'].yoa.errors['required']">
+                This Field is required!
+              </span>
+                <span *ngIf="!educationInfoForm.get('degrees')['controls'][i]['controls'].yoa.errors['required']
+                            && educationInfoForm.get('degrees')['controls'][i]['controls'].yoa.errors['alphaNumeric']">
+                  Please enter numbers only!
+                </span>
+                <span *ngIf="!educationInfoForm.get('degrees')['controls'][i]['controls'].yoa.errors['required']
+                            && !educationInfoForm.get('degrees')['controls'][i]['controls'].yoa.errors['alphaNumeric']
+                            && educationInfoForm.get('degrees')['controls'][i]['controls'].yoa.errors['lessThanMin']">
+                  Please enter at least 4 characters.
+                </span>
+                <span *ngIf="!educationInfoForm.get('degrees')['controls'][i]['controls'].yoa.errors['required']
+                            && !educationInfoForm.get('degrees')['controls'][i]['controls'].yoa.errors['alphaNumeric']
+                            && !educationInfoForm.get('degrees')['controls'][i]['controls'].yoa.errors['lessThanMin']
+                            && educationInfoForm.get('degrees')['controls'][i]['controls'].yoa.errors['exceedMax']">
+                  Please enter no more than 4 characters.
+                </span>
+            </span>
+        </div>
+
+        <div class="form-group">
+          <label for="gpa">Class/GPA<span *ngIf="!isSummaryMode">*</span></label>
+          <input type="text" id="gpa" name="gpa" formControlName="gpa" class="form-control"
+                 placeholder="Eg. 3.25 or Second Class Upper Division"/>
+          <span
+            *ngIf="!educationInfoForm.get('degrees')['controls'][i]['controls'].gpa.valid && (educationInfoForm.get('degrees')['controls'][i]['controls'].gpa.touched  || isSubmitClicked)"
+            class="help-block">
+                This Field is required!
+            </span>
+        </div>
+        <div class="form-group">
+          <label for="dateEntered">Start Date<span *ngIf="!isSummaryMode">*</span></label>
+          <input type="date" [max]="educationInfoForm.get('degrees')['controls'][i]['controls'].dateLeft.value"
+                 id="dateEntered" name="dateEntered" formControlName="dateEntered" class="form-control"
+                 placeholder="YYYY-MM-DD"/>
+          <span
+            *ngIf="!educationInfoForm.get('degrees')['controls'][i]['controls'].dateEntered.valid && (educationInfoForm.get('degrees')['controls'][i]['controls'].dateEntered.touched || isSubmitClicked)"
+            class="help-block">
+                This Field is required!
+            </span>
+        </div>
+        <div class="form-group">
+          <label for="dateLeft">End Date<span *ngIf="!isSummaryMode">*</span></label>
+          <input type="date" [min]="educationInfoForm.get('degrees')['controls'][i]['controls'].dateEntered.value"
+                 id="dateLeft" name="dateLeft" formControlName="dateLeft" class="form-control"
+                 placeholder="YYYY-MM-DD"/>
+          <span
+            *ngIf="!educationInfoForm.get('degrees')['controls'][i]['controls'].dateLeft.valid && (educationInfoForm.get('degrees')['controls'][i]['controls'].dateLeft.touched  || isSubmitClicked)"
+            class="help-block">
+                This Field is required!
+            </span>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div *ngIf="!isSummaryMode">
+      <button
+        class="btn btn-default"
+        type="button"
+        (click)="addDegree()">Add Degree
+      </button>
+      &nbsp;<span class="help__text">&lt;-&nbsp;Click here to add more degrees</span>
+    </div>
+  </section>
+
+
+  <br>
+  <br>
+  <h3>Other Professional Qualification</h3>
+  <hr>
+
+  <section formArrayName="otherQualifications">
+    <div *ngFor="let address of educationInfoForm['controls'].otherQualifications['controls']; let i=index"
+         class="panel panel-default">
+      <div class="panel-heading">
+        <span>{{i + 1}}) Qualification</span>
+        <span class="glyphicon glyphicon-remove pull-right" *ngIf="!isSummaryMode"
+              (click)="removeOtherQualification(i)"></span>
+      </div>
+      <div class="panel-body" [formGroupName]="i">
+        <div class="form-group">
+          <label for="otherQTitle">Qualification<span *ngIf="!isSummaryMode">*</span></label>
+          <input type="text" id="otherQTitle" name="otherQTitle" formControlName="otherQTitle" class="form-control"
+                 placeholder="Eg. Oracle Database 11g Certified Master Exam | 11GOCM"/>
+          <span
+            *ngIf="!educationInfoForm.get('otherQualifications')['controls'][i]['controls'].otherQTitle.valid && (educationInfoForm.get('otherQualifications')['controls'][i]['controls'].otherQTitle.touched || isSubmitClicked)"
+            class="help-block">
+                This Field is required!
+            </span>
+        </div>
+        <div class="form-group">
+          <label for="orgTitle">Organization<span *ngIf="!isSummaryMode">*</span></label>
+          <input type="text" id="orgTitle" name="orgTitle" formControlName="orgTitle" class="form-control"
+                 placeholder="Eg. Oracle Institue"/>
+          <span
+            *ngIf="!educationInfoForm.get('otherQualifications')['controls'][i]['controls'].orgTitle.valid && (educationInfoForm.get('otherQualifications')['controls'][i]['controls'].orgTitle.touched || isSubmitClicked)"
+            class="help-block">
+                This Field is required!
+            </span>
+        </div>
+        <div class="form-group">
+          <label for="doa">Membership Start Date<span *ngIf="!isSummaryMode">*</span></label>
+          <input type="date" id="doa" name="doa" formControlName="doa" class="form-control" placeholder="YYYY-MM-DD"/>
+          <span
+            *ngIf="!educationInfoForm.get('otherQualifications')['controls'][i]['controls'].doa.valid && (educationInfoForm.get('otherQualifications')['controls'][i]['controls'].doa.touched || isSubmitClicked)"
+            class="help-block">
+                This Field is required!
+            </span>
+        </div>
+        <div class="form-group">
+          <label for="duration">Membership Duration<span *ngIf="!isSummaryMode">*</span></label>
+          <input type="text" id="duration" name="duration" formControlName="duration" class="form-control"
+                 placeholder="Eg. 1 year"/>
+          <span
+            *ngIf="!educationInfoForm.get('otherQualifications')['controls'][i]['controls'].duration.valid && (educationInfoForm.get('otherQualifications')['controls'][i]['controls'].duration.touched || isSubmitClicked)"
+            class="help-block">
+                This Field is required!
+            </span>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div *ngIf="!isSummaryMode">
+      <button
+        class="btn btn-default"
+        type="button"
+        (click)="addOtherQualification()">Add Qualification
+      </button>
+      &nbsp;<span class="help__text">&lt;-&nbsp;Click here to add a new qualification</span>
+    </div>
+  </section>
+
+
+  <div *ngIf="!isSummaryMode">
+    <hr>
+    <div class="form-btm-btns">
+      <div>
+        <button class="btn btn-success" type="button" (click)="onBack()">Previous</button>
+      </div>
+      <div>
+        2/4
+      </div>
+      <div>
+        <button class="btn btn-success pull-right" type="submit">Next</button>
+      </div>
+    </div>
+    <br>
+  </div>
+</form>

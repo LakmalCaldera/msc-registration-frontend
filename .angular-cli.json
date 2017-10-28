@@ -9,6 +9,7 @@
       "outDir": "dist",
       "assets": [
         "assets",
+        "favicon",
         "favicon.ico"
       ],
       "index": "index.html",
@@ -19,9 +20,14 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css"
       ],
-      "scripts": [],
+      "scripts": [
+         "../node_modules/moment/min/moment.min.js",
+         "../node_modules/jspdf/dist/jspdf.min.js",
+        "../node_modules/date-input-polyfill/date-input-polyfill.dist.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

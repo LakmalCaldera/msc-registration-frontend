@@ -1,0 +1,229 @@
+<form [formGroup]="generalInfoForm" (ngSubmit)="onSubmit()">
+
+  <app-common-header headerTitle="General Information" [removeDetail]="removeDetail"></app-common-header>
+
+  <div class="panel panel-default">
+    <!-- Panel Heading -->
+    <div class="panel-heading">
+      <span>Masters Degree Program:</span>
+    </div>
+
+    <!-- Panel Body -->
+    <div class="panel-body">
+
+      <div class="form-group">
+        <label for="firstProgram">First Preference<span *ngIf="!isSummaryMode">*</span></label>
+        <select id="firstProgram" class="form-control" name="firstProgram" formControlName="firstProgram">
+          <option *ngFor="let program of firstSelectionDegreePrograms; let i = index" value="{{program.value}}">
+            {{program.text}}
+          </option>
+        </select>
+        <span *ngIf="!generalInfoForm.get('firstProgram').valid && (generalInfoForm.get('firstProgram').touched || isSubmitClicked )"
+          class="help-block">
+              <span
+                *ngIf="generalInfoForm.get('firstProgram').errors['invalidSelection']">You must make a selection!</span>
+        </span>
+      </div>
+
+
+      <div class="form-group">
+        <label for="secondProgram">Second Preference</label>
+        <select id="secondProgram" class="form-control" name="secondProgram" formControlName="secondProgram">
+          <option *ngFor="let program of secondSelectionDegreePrograms; let i = index" value="{{program.value}}">
+            {{program.text}}
+          </option>
+        </select>
+      </div>
+
+
+      <div class="form-group">
+        <label for="thirdProgram">Third Preference</label>
+        <select id="thirdProgram" class="form-control" name="thirdProgram" formControlName="thirdProgram">
+          <option *ngFor="let program of thirdSelectionDegreePrograms; let i = index" value="{{program.value}}">
+            {{program.text}}
+          </option>
+        </select>
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <span>Personal Information:</span>
+    </div>
+    <div class="panel-body">
+      <div class="two-piece">
+        <div class="form-group col">
+          <label for="title">Title<span *ngIf="!isSummaryMode">*</span></label>
+          <select id="title" class="form-control" name="title" formControlName="title">
+            <option *ngFor="let title of titles; let i = index" value="{{title.value}}">{{title.text}}</option>
+          </select>
+          <span *ngIf="!generalInfoForm.get('title').valid && (generalInfoForm.get('title').touched|| isSubmitClicked )" class="help-block">
+              <span *ngIf="generalInfoForm.get('title').errors['invalidSelection']">You must make a selection!</span>
+          </span>
+        </div>
+
+        <div class="form-group col">
+          <label for="name_with_initial">Name With Initials<span *ngIf="!isSummaryMode">*</span></label>
+          <input type="text" id="name_with_initial" name="name_with_initial" formControlName="name_with_initial" class="form-control"
+            placeholder="Eg. T.K.Silva" />
+          <span *ngIf="!generalInfoForm.get('name_with_initial').valid && (generalInfoForm.get('name_with_initial').touched || isSubmitClicked )"
+            class="help-block">
+                This Field is required!
+            </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="fullName">Name Denoted By Initials<span *ngIf="!isSummaryMode">*</span></label>
+        <input type="text" id="fullName" name="fullName" formControlName="fullName" class="form-control" placeholder="Eg. Telia Kasula Silva"
+        />
+        <span *ngIf="!generalInfoForm.get('fullName').valid && (generalInfoForm.get('fullName').touched || isSubmitClicked )" class="help-block">
+                This Field is required!
+            </span>
+      </div>
+
+      <div class="two-piece">
+        <div class="form-group">
+          <label for="gender">Gender<span *ngIf="!isSummaryMode">*</span></label>
+          <select id="gender" class="form-control" name="title" formControlName="gender">
+            <option *ngFor="let gender of genders; let i = index" value="{{gender.value}}">{{gender.text}}</option>
+          </select>
+          <span *ngIf="!generalInfoForm.get('gender').valid && (generalInfoForm.get('gender').touched|| isSubmitClicked )" class="help-block">
+              <span *ngIf="generalInfoForm.get('gender').errors['invalidSelection']">You must make a selection!</span>
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label for="dob">Date of Birth<span *ngIf="!isSummaryMode">*</span></label>
+          <input type="date" id="dob" name="dob" formControlName="dob" class="form-control" placeholder="YYYY-MM-DD">
+          <span *ngIf="!generalInfoForm.get('dob').valid && (generalInfoForm.get('dob').touched || isSubmitClicked)" class="help-block">
+                <span>
+                This Field is required!
+                </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address<span *ngIf="!isSummaryMode">*</span></label>
+        <input type="text" id="email" name="email" formControlName="email" class="form-control" placeholder="Eg. sooriyabandara@gmail.com"
+        />
+        <span *ngIf="!generalInfoForm.get('email').valid && (generalInfoForm.get('email').touched || isSubmitClicked)" class="help-block">
+              <span *ngIf="generalInfoForm.get('email').errors['required']">
+                This Field is required!
+              </span>
+        <span *ngIf="!generalInfoForm.get('email').errors['required'] && generalInfoForm.get('email').errors['email']">
+                Please enter a valid email address!
+              </span>
+        </span>
+      </div>
+
+
+      <div class="form-group">
+        <label for="nic">National ID/Passport No.<span *ngIf="!isSummaryMode">*</span></label>
+        <input type="text" id="nic" name="nic" formControlName="nic" class="form-control" placeholder="Eg. 850678945V" [readonly]="isNicReadOnly"
+        />
+        <span *ngIf="!generalInfoForm.get('nic').valid && (generalInfoForm.get('nic').touched || isSubmitClicked)" class="help-block">
+              <span *ngIf="generalInfoForm.get('nic').errors['required']">
+                This Field is required!
+              </span>
+        <span *ngIf="!generalInfoForm.get('nic').errors['required']
+                            && generalInfoForm.get('nic').errors['lastChar']">
+                  Please enter last character in capital!
+                </span>
+        <span *ngIf="!generalInfoForm.get('nic').errors['required']
+                            && generalInfoForm.get('nic').errors['exceedMax']">
+                  Please enter no more than 10 characters.
+                </span>
+        </span>
+      </div>
+
+
+      <div class="form-group">
+        <label for="mobileno">Mobile Number<span *ngIf="!isSummaryMode">*</span></label>
+        <input type="text" id="mobileno" name="mobileno" formControlName="mobileno" class="form-control" placeholder="Eg. 0715478524"
+        />
+        <span *ngIf="!generalInfoForm.get('mobileno').valid && (generalInfoForm.get('mobileno').touched  || isSubmitClicked)" class="help-block">
+              <span *ngIf="generalInfoForm.get('mobileno').errors['required']">
+                This Field is required!
+              </span>
+        <span *ngIf="!generalInfoForm.get('mobileno').errors['required']
+                            && generalInfoForm.get('mobileno').errors['alphaNumeric']">
+                  Please enter numbers only!
+                </span>
+        <span *ngIf="!generalInfoForm.get('mobileno').errors['required']
+                            && !generalInfoForm.get('mobileno').errors['alphaNumeric']
+                            && generalInfoForm.get('mobileno').errors['lessThanMin']">
+                  Please enter at least 10 characters.
+                </span>
+        <span *ngIf="!generalInfoForm.get('mobileno').errors['required']
+                            && !generalInfoForm.get('mobileno').errors['alphaNumeric']
+                            && !generalInfoForm.get('mobileno').errors['lessThanMin']
+                            && generalInfoForm.get('mobileno').errors['exceedMax']">
+                  Please enter no more than 10 characters.
+                </span>
+        </span>
+      </div>
+
+
+      <div class="form-group">
+        <label for="homeno">Fixed Line Number<span *ngIf="!isSummaryMode">*</span></label>
+        <input type="text" id="homeno" name="homeno" formControlName="homeno" class="form-control" placeholder="Eg. 0472255755" />
+        <span *ngIf="!generalInfoForm.get('homeno').valid && (generalInfoForm.get('homeno').touched || isSubmitClicked )" class="help-block">
+              <span *ngIf="generalInfoForm.get('homeno').errors['required']">
+                This Field is required!
+              </span>
+        <span *ngIf="!generalInfoForm.get('homeno').errors['required']
+                            && generalInfoForm.get('homeno').errors['alphaNumeric']">
+                  Please enter numbers only!
+                </span>
+        <span *ngIf="!generalInfoForm.get('homeno').errors['required']
+                            && !generalInfoForm.get('homeno').errors['alphaNumeric']
+                            && generalInfoForm.get('homeno').errors['lessThanMin']">
+                  Please enter at least 10 characters.
+                </span>
+        <span *ngIf="!generalInfoForm.get('homeno').errors['required']
+                            && !generalInfoForm.get('homeno').errors['alphaNumeric']
+                            && !generalInfoForm.get('homeno').errors['lessThanMin']
+                            && generalInfoForm.get('homeno').errors['exceedMax']">
+                  Please enter no more than 10 characters.
+                </span>
+        </span>
+      </div>
+
+
+      <div class="form-group">
+        <label for="address">Permanent Address<span *ngIf="!isSummaryMode">*</span></label>
+        <textarea type="text" id="address" name="address" formControlName="address" class="form-control" placeholder="Eg. 66 A, Ovitigamuwa, Puhulwella, Matara."></textarea>
+        <span *ngIf="!generalInfoForm.get('address').valid && (generalInfoForm.get('address').touched || isSubmitClicked )" class="help-block">
+              <span *ngIf="generalInfoForm.get('address').errors['required']">
+                This Field is required!
+              </span>
+        </span>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div *ngIf="!isSummaryMode">
+    <hr>
+    <div class="form-btm-btns">
+      <div>
+        <button class="btn btn-success" type="button" (click)="onBack()">Previous</button>
+      </div>
+      <div>1/4</div>
+      <div>
+        <button class="btn btn-success pull-right clearfix" type="submit">Next</button>
+      </div>
+    </div>
+    <br>
+  </div>
+
+
+</form>

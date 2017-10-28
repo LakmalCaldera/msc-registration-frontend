@@ -1,0 +1,12 @@
+<div class="app__header__title" *ngIf="!removeDetail">
+  <span>Welcome to the Masters Registration Process, {{year}} </span>
+</div>
+<div class="app__header">
+  <div class="pull-left">
+    <h3>{{headerTitle}}</h3>
+    <span *ngIf="!removeDetail">{{customMessage}}</span>
+  </div>
+  <img *ngIf="!removeDetail" class="pull-right" src="./../assets/ucsc.png" alt="logo"/>
+</div>
+<div class="clearfix"></div>
+<hr>

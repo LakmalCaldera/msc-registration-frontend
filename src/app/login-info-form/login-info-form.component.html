@@ -1,0 +1,36 @@
+<form [formGroup]="loginInfoForm" (ngSubmit)="onSubmit()">
+  <app-common-header headerTitle="Masters Registration"></app-common-header>
+  <section>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <span>Get Started:</span>
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+          <label for="nic">National ID/Passport No.*</label>
+          <input type="text" id="nic" name="nic" formControlName="nic" class="form-control" placeholder="Eg. 850678945V"/>
+          <span
+            *ngIf="!loginInfoForm.get('nic').valid && (loginInfoForm.get('nic').touched || isSubmitClicked)"
+            class="help-block">
+              <span *ngIf="loginInfoForm.get('nic').errors['required']">
+                This Field is required!
+              </span>
+                <span *ngIf="!loginInfoForm.get('nic').errors['required']
+                            && loginInfoForm.get('nic').errors['lastChar']">
+                  Please enter last character in capital!
+                </span>
+                <span *ngIf="!loginInfoForm.get('nic').errors['required']
+                            && loginInfoForm.get('nic').errors['exceedMax']">
+                  Please enter no more than 10 characters.
+                </span>
+            </span>
+        </div>
+        <re-captcha (resolved)="resolved($event)" siteKey="6LfpvzIUAAAAACYXa_WK0QpyYZ32xdnxrNgVca2B"></re-captcha>
+      </div>
+    </div>
+  </section>
+  <hr>
+  <button class="btn btn-success pull-right clearfix" type="submit" [disabled]="!this.loginInfoForm.valid || !this.isCapchaValid || this.isSubmitClicked">Next</button>
+  <div class="clearfix"> </div>
+  <br>
+</form>

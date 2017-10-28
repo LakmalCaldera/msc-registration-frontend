@@ -1,0 +1,156 @@
+<form [formGroup]="summaryForm" (ngSubmit)="onSubmit()">
+
+  <div class="not-print">
+    <app-common-header headerTitle="Summary"
+                       [customMessage]="summaryTitle"></app-common-header>
+  </div>
+
+  <div class="print print-header">
+    <div>APPLICATION FORM FOR MASTERS DEGREE PROGRAMME – {{year}}</div>
+    <div>UNIVERSITY OF COLOMBO SCHOOL OF COMPUTING</div>
+    <img class="center"
+         src="data:image/png;base64,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"
+         alt="logo"/>
+
+  </div>
+
+
+  <section>
+
+    <app-general-info-form summary="true" removeHeaderDetail=true #formElm *ngIf="isDataLoaded"></app-general-info-form>
+    <app-education-info-form summary="true" removeHeaderDetail=true  *ngIf="isDataLoaded"></app-education-info-form>
+    <app-job-info-form summary="true" removeHeaderDetail=true *ngIf="isDataLoaded"></app-job-info-form>
+    <app-referee-info-form summary="true" removeHeaderDetail=true *ngIf="isDataLoaded"></app-referee-info-form>
+    <section *ngIf="isStudentPaymentInformationComplete">
+      <h3>Payment Information</h3>
+      <hr>
+      <div class="panel panel-default">
+        <!-- Panel Heading -->
+        <div class="panel-heading">
+          <span>Payment Details:</span>
+        </div>
+
+        <!-- Panel Body -->
+        <div class="panel-body">
+
+          <div class="form-group">
+            <label for="transactionId">Transaction Reference No</label>
+            <input type="text" id="transactionId" name="transactionId" class="form-control" [value]="transId"
+                    disabled="true"/>
+          </div>
+
+          <div class="form-group">
+            <label for="transactionDate">Transaction Date</label>
+            <input type="text" id="transactionDate" name="transactionDate" class="form-control"
+                    disabled="true"  [value]="transDate"/>
+          </div>
+
+          <div class="form-group">
+            <label for="amountPaid">Amount Paid</label>
+            <input type="text" id="amountPaid" name="amountPaid" class="form-control"
+                   disabled="true" [value]="transAmount"/>
+          </div>
+
+        </div>
+      </div>
+    </section>
+    <button class="btn btn-primary download-save-btn" type="button" (click)="onPrint()">Download/Print Form</button>
+
+    <div class="form-check not-print" *ngIf="!isStudentConfirmed">
+      <label for="allInfoVerified" class="form-check-label justify-text">
+        <input type="checkbox" id="allInfoVerified" name="allInfoVerified" formControlName="allInfoVerified"
+               class="form-check-input"/>
+        I DO HEREBY DECLARE THAT THE ABOVE PERTICULARS FURNISHED BY ME ARE TRUE AND CORRECT. I FURTHER CERTIFY THAT THE
+        DETAILS FURNISHED BY ME ON MY UNIVERSITY EDUCATION IS ACCURATE AND I HAVE BEEN AWARDED A DEGREE FROM A
+        UNIVERSITY / INSTITUTION RECOGNIZED BY THE UGC (HTTP://WWW.UGC.AC.LK/). IN THE EVENT OF MY APPLICATION FOR
+        REGISTRATION BEING ACCEPTED, I SHALL ABIDE BY ALL THE REGULATIONS GOVERNING EXTERNAL CANDIDATES OF THE
+        UNIVERSITY OF COLOMBO SCHOOL OF COMPUTING. I AGREE THAT THE UNIVERSITY HAS THE RIGHT TO CANCEL MY REGISTRATION
+        AT ANY TIME, EITHER IF I AM FOUND TO HAVE FURNISHED FALSE INFORMATION OR IF I DO NOT ADIBE BY THE REGULATIONS
+        GOVERNING EXTERNAL CANDIDATES OF THE UNIVERSITY OF COLOMBO SCHOOL OF COMPUTING.
+      </label>
+      <br>
+      <strong *ngIf="!isStudentConfirmed">Note: Once confirmed, you cannot edit your information again!</strong>
+      <span
+        *ngIf="!summaryForm.get('allInfoVerified').valid && (summaryForm.get('allInfoVerified').touched || isSubmitClicked)"
+        class="help-block">
+              <span>
+                You must accept the terms before proceeding.
+              </span>
+            </span>
+      <br>
+    </div>
+
+    <br>
+    <!--<a href="/assets/admission_forms_2017_2018/Aptitude_Test_Admistion_Card_MCS_2017-2018.doc"-->
+       <!--class="btn btn-primary download-save-btn" *ngIf="isStudentPaymentComplete" disabled="true">Download-->
+      <!--Admission Card</a>-->
+    <button class="btn btn-primary download-save-btn not-print" *ngIf="isStudentConfirmed && isStudentPaymentComplete" disabled="true" style="margin-bottom: 6px !important">Download
+      Admission Card</button>
+    <div *ngIf="isStudentConfirmed && isStudentPaymentComplete" class="not-print">Admission form will be available for download after the 8th December.</div>
+    <!--<a href="/assets/admission_forms_2017_2018/Aptitude_Test_Admistion_Card_MIT_2017-2018.doc" class="btn btn-primary download-save-btn" *ngIf="isMITSelected() && isStudentPaymentComplete">Download MIT Aptitude Test Admission Card</a>-->
+    <!--<a href="/assets/admission_forms_2017_2018/Aptitude_Test_Admistion_Card_MIS_2017-2018.doc" class="btn btn-primary download-save-btn" *ngIf="isMISSelected() && isStudentPaymentComplete">Download MIS Aptitude Test Admission Card</a>-->
+
+  </section>
+
+
+  <div class="not-print">
+    <hr>
+    <button class="btn btn-success" type="button" (click)="onBack()" type="button" *ngIf="!isStudentConfirmed">
+      Previous
+    </button>
+    <button class="btn btn-success pull-left clearfix auto-size-btn" type="button" (click)="onInstructions()"
+            *ngIf="isStudentConfirmed">Instructions
+    </button>
+    <button class="btn btn-success pull-right clearfix auto-size-btn" type="button" (click)="onPayment()"
+            *ngIf="isStudentConfirmed && !isStudentPaymentComplete">Online Payment
+    </button>
+    <button class="btn btn-success pull-right clearfix" type="submit"
+            [disabled]="!summaryForm.get('allInfoVerified').valid || isSubmitClicked" *ngIf="!isStudentConfirmed">
+      Confirm
+    </button>
+    <div class="clearfix"></div>
+    <br>
+  </div>
+
+  <div class="print page-break-before">
+    <br>
+    <br>
+    <h6 class="print-confirmation-check-box">I CONFIRM THAT THE ABOVE PERTICULARS FURNISHED BY ME ARE TRUE AND
+      CORRECT.</h6>
+    <br>
+  </div>
+
+  <div class="print declaration-box">
+    <div>
+      <h4 class="declaration-header">
+        Declaration
+      </h4>
+      <br>
+      <div class="declaration-content">
+        I DO HEREBY DECLARE THAT THE ABOVE PERTICULARS FURNISHED BY ME ARE TRUE AND CORRECT. I FURTHER CERTIFY THAT THE
+        DETAILS FURNISHED BY ME ON MY UNIVERSITY EDUCATION IS ACCURATE AND I HAVE BEEN AWARDED A DEGREE FROM A
+        UNIVERSITY / INSTITUTION RECOGNIZED BY THE UGC (HTTP://WWW.UGC.AC.LK/). IN THE EVENT OF MY APPLICATION FOR
+        REGISTRATION BEING ACCEPTED, I SHALL ABIDE BY ALL THE REGULATIONS GOVERNING EXTERNAL CANDIDATES OF THE
+        UNIVERSITY OF COLOMBO SCHOOL OF COMPUTING. I AGREE THAT THE UNIVERSITY HAS THE RIGHT TO CANCEL MY REGISTRATION
+        AT ANY TIME, EITHER IF I AM FOUND TO HAVE FURNISHED FALSE INFORMATION OR IF I DO NOT ADIBE BY THE REGULATIONS
+        GOVERNING EXTERNAL CANDIDATES OF THE UNIVERSITY OF COLOMBO SCHOOL OF COMPUTING.
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="declaration-footer">
+      <div>DATE</div>
+      <div></div>
+      <div>SIGNATURE OF APPLICANT</div>
+    </div>
+    <br>
+    <br>
+    <br>
+  </div>
+
+
+</form>

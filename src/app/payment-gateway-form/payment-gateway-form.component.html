@@ -1,0 +1,21 @@
+<div class="app-card">
+  <app-common-header headerTitle="Payment Gateway" customMessage="Welcome to the UCSC Payment Gatway."></app-common-header>
+  <section>
+
+    <div class="panel panel-default">
+      <div class="panel-body success__message_panel payment-iframe-container">
+
+        <strong>Note:</strong>&nbsp;<span class="note-text">Please be patient as we reach out to the payment gateway to get you to the payment form. This may take some time depending on your internet connection.</span>
+        <br>
+        <br>
+        <br>
+        <br>
+        <iframe [src]="url" frameborder="0" class="payment-iframe" #iFrame></iframe>
+
+
+      </div>
+    </div>
+
+  </section>
+  <br>
+</div>

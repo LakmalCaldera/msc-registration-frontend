@@ -1,0 +1,24 @@
+<div class="app-card">
+  <app-common-header headerTitle="Payment Confirmation"
+                     customMessage="Confirm the payment details."></app-common-header>
+  <section>
+    <h4>Hi {{getName()}},</h4>
+    <br>
+    <div>
+      You need to pay <strong>2500 LKR</strong>.Would you like to proceed to our payment
+      gateway?
+    </div>
+    <div class="payment-help-text">
+      Those who are unable to pay online shall pay in cash to the Shroff Counter at UCSC from 9.00 a.m. to 3.00 p.m. on
+      working days. The UCSC copy of the paying-in slip should be sent along with the printed copy of the signed
+      application form. <strong>Please note Cheques/ Money orders will not be accepted</strong>.
+    </div>
+  </section>
+  <hr>
+  <div>
+    <button class="btn btn-danger pull-left" type="submit" (click)="onNo()">No</button>
+    <button class="btn btn-success pull-right" type="submit" (click)="onYes()" [disabled]="isOkBtnClicked">Yes</button>
+  </div>
+  <div class="clearfix"></div>
+  <br>
+</div>
