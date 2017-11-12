@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http, Response, Headers, RequestOptions} from '@angular/http';
+import {Http, Response, Headers, RequestOptions, ResponseContentType} from '@angular/http';
 import 'rxjs/add/operator/map'
 import * as moment from 'moment';
 import { PaymentService } from './payment.service';
@@ -383,5 +383,12 @@ export class FormService {
     let options = new RequestOptions({headers: headers});
 
     return this.http.get(`/registration/${hash}/info`, options).map((res:Response) => res.json())
+  }
+
+  downloadAdmissionCard() {
+    let headers = new Headers({'Content-Type': 'application/pdf', 'Content-Disposition': 'inline; filename=admission_card.pdf'});
+    let options = new RequestOptions({headers: headers});
+
+    return this.http.get(`/registration/admission?degPref=${this.generalInfo.firstProgram}&nic=${this.generalInfo.nic}&name=${this.generalInfo.name_with_initial}`, { responseType: ResponseContentType.Blob }).map((res:Response) => res.json())
   }
 }

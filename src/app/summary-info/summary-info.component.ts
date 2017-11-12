@@ -1,17 +1,18 @@
-import {Component, OnInit, ElementRef, ViewChild} from '@angular/core';
-import {Http, Response, Headers, RequestOptions} from '@angular/http';
-import {Location} from '@angular/common';
-import {FormArray, FormControl, FormGroup, Validators, FormBuilder} from '@angular/forms';
-import {Observable} from 'rxjs/Observable';
-import {Router, ActivatedRoute, RouterStateSnapshot, Params} from '@angular/router';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Location } from '@angular/common';
+import { FormArray, FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
+import { Router, ActivatedRoute, RouterStateSnapshot, Params } from '@angular/router';
 import * as jsPDF from 'jspdf';
-import {LoginInfo, GeneralInfo, EducationInfo, JobInfo, RefereeInfo, RegistrationResponse} from './../interfaces';
+import { LoginInfo, GeneralInfo, EducationInfo, JobInfo, RefereeInfo, RegistrationResponse } from './../interfaces';
 import * as moment from 'moment';
-import 'rxjs/Rx' ;
+import 'rxjs/Rx';
+import * as FileSaver from 'file-saver';
 
-import {CustomValidators} from './../custom.validators';
-import {FormService} from './../form.service';
-import {PaymentService} from './../payment.service';
+import { CustomValidators } from './../custom.validators';
+import { FormService } from './../form.service';
+import { PaymentService } from './../payment.service';
 
 @Component({
   selector: 'app-summary-info',
@@ -20,21 +21,21 @@ import {PaymentService} from './../payment.service';
 })
 export class SummaryInfoComponent implements OnInit {
 
-  summaryForm:FormGroup;
-  year:string;
-  isStudentConfirmed:boolean;
-  isStudentPaymentComplete:boolean;
-  summaryTitle:string;
+  summaryForm: FormGroup;
+  year: string;
+  isStudentConfirmed: boolean;
+  isStudentPaymentComplete: boolean;
+  summaryTitle: string;
   isStudentPaymentInformationComplete: boolean;
 
-  isSubmitClicked:boolean = false;
+  isSubmitClicked: boolean = false;
   transId;
   transAmount;
   transDate;
-  isDataLoaded:boolean = true;
+  isDataLoaded: boolean = true;
 
-  constructor(private paymentService:PaymentService, private http:Http, private formService:FormService, private router:Router,
-              private route:ActivatedRoute, private formBuilder:FormBuilder) {
+  constructor(private paymentService: PaymentService, private http: Http, private formService: FormService, private router: Router,
+    private route: ActivatedRoute, private formBuilder: FormBuilder) {
   }
 
   ngOnInit() {
@@ -74,11 +75,11 @@ export class SummaryInfoComponent implements OnInit {
   loadData() {
     if (!this.formService.isGeneralFormComplete() || !this.formService.isEducationFormCompelete() || !this.formService.isJobFormCompelete() || !this.formService.isRefereeFormCompelete()) {
       this.formService.setUserRegistered()
-      this.route.queryParams.subscribe((params:Params) => {
+      this.route.queryParams.subscribe((params: Params) => {
         let secret = params['secret'];
         if (secret) {
           this.isDataLoaded = false;
-          this.formService.getFormDataFromHash(secret).subscribe((res:Response) => {
+          this.formService.getFormDataFromHash(secret).subscribe((res: Response) => {
             if (res != null) {
               this.formService.loadUserData(res)
               this.formService.setUserRegistered()
@@ -87,8 +88,8 @@ export class SummaryInfoComponent implements OnInit {
               this.formService.resetRegisteredUser()
             }
             this.isDataLoaded = true;
-          }, (res:Response) => {
-            this.router.navigate(['../request-error'], {relativeTo: this.route});
+          }, (res: Response) => {
+            this.router.navigate(['../request-error'], { relativeTo: this.route });
           });
         } else {
           this.loadDataIntoSummary()
@@ -100,7 +101,7 @@ export class SummaryInfoComponent implements OnInit {
   }
 
   onBack() {
-    this.router.navigate(['../referee'], {relativeTo: this.route});
+    this.router.navigate(['../referee'], { relativeTo: this.route });
   }
 
   onPrint() {
@@ -112,12 +113,12 @@ export class SummaryInfoComponent implements OnInit {
     this.isSubmitClicked = true;
 
     if (observable) {
-      observable.subscribe((res:Response) => {
+      observable.subscribe((res: Response) => {
         let data = res as Object as RegistrationResponse
         console.log(data)
         this.formService.loadUserData(res)
         this.formService.setStudentHash(data.hash);
-        if (!this.paymentService.isStudentPaymentComplete()){
+        if (!this.paymentService.isStudentPaymentComplete()) {
           this.onPayment();
         } else {
           this.loadDataIntoSummary()
@@ -127,15 +128,15 @@ export class SummaryInfoComponent implements OnInit {
   }
 
   onPayment() {
-    this.router.navigate(['../payment-confirmation'], {relativeTo: this.route});
+    this.router.navigate(['../payment-confirmation'], { relativeTo: this.route });
   }
 
   onInstructions() {
-    this.router.navigate(['../instruction'], {relativeTo: this.route});
+    this.router.navigate(['../instruction'], { relativeTo: this.route });
   }
 
   onStatus() {
-    this.router.navigate(['../registration-success'], {relativeTo: this.route});
+    this.router.navigate(['../registration-success'], { relativeTo: this.route });
   }
 
   isMCSSelected() {
@@ -154,6 +155,18 @@ export class SummaryInfoComponent implements OnInit {
     return this.formService.generalInfo.firstProgram == "MIS" ||
       this.formService.generalInfo.secondProgram == "MIS" ||
       this.formService.generalInfo.thirdProgram == "MIS"
+  }
+
+  downloadMyAdmission() {
+    this.formService.downloadAdmissionCard().subscribe((res: any) => {
+      if (res) {
+        console.log("PDF downloaded");
+        let filename = `admission_card_${this.formService.generalInfo.nic}_${this.formService.generalInfo.firstProgram}.pdf`;
+        FileSaver.saveAs(res, filename);
+      }
+    }, (res: Response) => {
+      this.router.navigate(['../request-error'], { relativeTo: this.route });
+    });
   }
 }
 

@@ -81,14 +81,10 @@
     </div>
 
     <br>
-    <!--<a href="/assets/admission_forms_2017_2018/Aptitude_Test_Admistion_Card_MCS_2017-2018.doc"-->
-       <!--class="btn btn-primary download-save-btn" *ngIf="isStudentPaymentComplete" disabled="true">Download-->
-      <!--Admission Card</a>-->
-    <button class="btn btn-primary download-save-btn not-print" *ngIf="isStudentConfirmed && isStudentPaymentComplete" disabled="true" style="margin-bottom: 6px !important">Download
+
+    <button  type="button" class="btn btn-primary download-save-btn not-print" *ngIf="isStudentConfirmed && isStudentPaymentComplete" style="margin-bottom: 6px !important" (click)="downloadMyAdmission()">Download
       Admission Card</button>
-    <div *ngIf="isStudentConfirmed && isStudentPaymentComplete" class="not-print">Admission form will be available for download after the 8th December.</div>
-    <!--<a href="/assets/admission_forms_2017_2018/Aptitude_Test_Admistion_Card_MIT_2017-2018.doc" class="btn btn-primary download-save-btn" *ngIf="isMITSelected() && isStudentPaymentComplete">Download MIT Aptitude Test Admission Card</a>-->
-    <!--<a href="/assets/admission_forms_2017_2018/Aptitude_Test_Admistion_Card_MIS_2017-2018.doc" class="btn btn-primary download-save-btn" *ngIf="isMISSelected() && isStudentPaymentComplete">Download MIS Aptitude Test Admission Card</a>-->
+    <!--<div *ngIf="isStudentConfirmed && isStudentPaymentComplete" class="not-print">Admission form will be available for download after the 8th December.</div>-->
 
   </section>
 

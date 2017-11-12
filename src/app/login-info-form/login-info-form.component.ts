@@ -50,7 +50,11 @@ export class LoginInfoFormComponent implements OnInit {
           }
           this.router.navigate(['../instruction'], {relativeTo: this.route});
         }, (res: Response) => {
+          if (res.status == 401){
+            this.router.navigate(['../registration-closed'], {relativeTo: this.route});
+          } else {
           this.router.navigate(['../request-error'], {relativeTo: this.route});
+          }
         });
       }
     }

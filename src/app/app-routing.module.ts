@@ -20,19 +20,19 @@ import { AuthSystemOpenGuard } from './auth-guard-system-open-validation.service
 import { PaymentConfirmationFormComponent } from './payment-confirmation-form/payment-confirmation-form.component';
 
 const appRoutes: Routes = [
-  { path: 'payment-confirmation', component: PaymentConfirmationFormComponent, canActivate: [AuthSystemOpenGuard] },
-  { path: 'registration-success', component: RegistrationSuccessMessageComponent, canActivate: [AuthSystemOpenGuard]},
+  { path: 'payment-confirmation', component: PaymentConfirmationFormComponent },
+  { path: 'registration-success', component: RegistrationSuccessMessageComponent},
   { path: 'registration-closed', component: RegistrationsClosedComponent},
-  { path: '', component: LoginInfoFormComponent, canActivate: [AuthSummaryGuard, AuthSystemOpenGuard]},
-  { path: 'login', component: LoginInfoFormComponent, canActivate: [AuthSummaryGuard, AuthSystemOpenGuard]},
-  { path: 'instruction', component: StudentInstructionComponent, canActivate: [AuthLoginGuard, AuthSystemOpenGuard]},
-  { path: 'general', component: GeneralInfoFormComponent, canActivate: [AuthLoginGuard, AuthSummaryGuard, AuthSystemOpenGuard]},
-  { path: 'education', component: EducationInfoFormComponent, canActivate: [AuthLoginGuard, AuthSummaryGuard, AuthSystemOpenGuard]},
-  { path: 'job', component: JobInfoFormComponent, canActivate: [AuthLoginGuard, AuthSummaryGuard, AuthSystemOpenGuard]},
-  { path: 'referee', component: RefereeInfoFormComponent, canActivate: [AuthLoginGuard, AuthSummaryGuard, AuthSystemOpenGuard]},
-  { path: 'summary', component: SummaryInfoComponent, canActivate: [AuthSystemOpenGuard]},
-  { path: 'payment-gw', component: PaymentGatewayFormComponent, canActivate: [AuthSystemOpenGuard]},
-  { path: 'request-error', component: RequestErrorComponent, canActivate: [AuthSystemOpenGuard]},
+  { path: '', component: LoginInfoFormComponent, canActivate: [AuthSummaryGuard]},
+  { path: 'login', component: LoginInfoFormComponent, canActivate: [AuthSummaryGuard]},
+  { path: 'instruction', component: StudentInstructionComponent, canActivate: [AuthLoginGuard]},
+  { path: 'general', component: GeneralInfoFormComponent, canActivate: [AuthLoginGuard, AuthSummaryGuard]},
+  { path: 'education', component: EducationInfoFormComponent, canActivate: [AuthLoginGuard, AuthSummaryGuard]},
+  { path: 'job', component: JobInfoFormComponent, canActivate: [AuthLoginGuard, AuthSummaryGuard]},
+  { path: 'referee', component: RefereeInfoFormComponent, canActivate: [AuthLoginGuard, AuthSummaryGuard]},
+  { path: 'summary', component: SummaryInfoComponent},
+  { path: 'payment-gw', component: PaymentGatewayFormComponent},
+  { path: 'request-error', component: RequestErrorComponent},
   { path: 'not-found', component: NotFoundErrorComponent, data: {message: 'Page not found!'} },
   { path: '**', redirectTo: '/not-found' }
 ];
