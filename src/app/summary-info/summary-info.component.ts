@@ -158,15 +158,15 @@ export class SummaryInfoComponent implements OnInit {
   }
 
   downloadMyAdmission() {
-    this.formService.downloadAdmissionCard().subscribe((res: any) => {
-      if (res) {
-        console.log("PDF downloaded");
-        let filename = `admission_card_${this.formService.generalInfo.nic}_${this.formService.generalInfo.firstProgram}.pdf`;
-        FileSaver.saveAs(res, filename);
-      }
-    }, (res: Response) => {
-      this.router.navigate(['../request-error'], { relativeTo: this.route });
-    });
+    // this.formService.downloadAdmissionCard().subscribe((res: any) => {
+    //   if (res) {
+    //     console.log("PDF downloaded");
+    //     let filename = `admission_card_${this.formService.generalInfo.nic}_${this.formService.generalInfo.firstProgram}.pdf`;
+    //     FileSaver.saveAs(res, filename);
+    //   }
+    // }, (res: Response) => {
+    //   this.router.navigate(['../request-error'], { relativeTo: this.route });
+    // });
   }
 }
 
