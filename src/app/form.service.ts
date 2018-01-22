@@ -14,6 +14,8 @@ export class FormService {
   jobInfo:JobInfo;
   refereeInfo:RefereeInfo;
   studentHash: String;
+  studentIndexNo: number;
+  isDeffered: boolean;
 
   // Does student have an actual account
   _isUserRegistered:boolean = false;
@@ -255,6 +257,14 @@ export class FormService {
     }
   }
 
+  getStudentIndexNo(){
+    return this.studentIndexNo
+  }
+
+  isStudentDeffered(){
+    return this.isDeffered
+  }
+
   isStudentConfirmed() {
     return this._isStudentConfirmed
   }
@@ -284,6 +294,8 @@ export class FormService {
     this.generalInfo.homeno = data.home_no;
     this.generalInfo.address = data.personal_address;
     this._isStudentConfirmed = data.confirmed;
+    this.studentIndexNo = data.application_id
+    this.isDeffered = data.deffered;
 
     this.setStudentHash(data.hash);
     this.paymentService.setPaymentInfo(data.student_master.payment_transaction_id, data.student_master.payment_amount, data.student_master.registration_payment_date, data.student_master.registration_payment_status);
@@ -389,6 +401,6 @@ export class FormService {
     let headers = new Headers({'Content-Type': 'application/pdf', 'Content-Disposition': 'inline; filename=admission_card.pdf'});
     let options = new RequestOptions({headers: headers});
 
-    return this.http.get(`/registration/admission?degPref=${this.generalInfo.firstProgram}&nic=${this.generalInfo.nic}&name=${this.generalInfo.name_with_initial}`, { responseType: ResponseContentType.Blob }).map((res:Response) => res.json())
+    return this.http.get(`/registration/admission?nic=${this.generalInfo.nic}`, { responseType: ResponseContentType.Blob }).map((res:Response) => res.json())
   }
 }

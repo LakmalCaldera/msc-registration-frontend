@@ -33,6 +33,7 @@ export class SummaryInfoComponent implements OnInit {
   transAmount;
   transDate;
   isDataLoaded: boolean = true;
+  isDeffered: boolean = false;
 
   constructor(private paymentService: PaymentService, private http: Http, private formService: FormService, private router: Router,
     private route: ActivatedRoute, private formBuilder: FormBuilder) {
@@ -55,6 +56,7 @@ export class SummaryInfoComponent implements OnInit {
     this.transId = this.paymentService.getPaymentInfo().payment_transaction_id;
     this.transDate = moment.unix(this.paymentService.getPaymentInfo().registration_payment_date).format("DD/MM/YYYY");
     this.transAmount = this.paymentService.getPaymentInfo().payment_amount;
+    this.isDeffered = this.formService.isStudentDeffered()
 
     // // Set model data into form
     if (this.isStudentConfirmed) {

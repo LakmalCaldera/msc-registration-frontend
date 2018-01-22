@@ -107,7 +107,7 @@ export interface RegistrationResponse {
   home_no:string,
   application_id:number,
   personal_address:string,
-  deferred:string,
+  deffered:boolean,
   country:string,
   confirmed:boolean,
   student_education:{

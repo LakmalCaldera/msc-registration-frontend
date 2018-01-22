@@ -82,9 +82,12 @@
 
     <br>
 
-    <button  type="button" class="btn btn-primary download-save-btn not-print" *ngIf="isStudentConfirmed && isStudentPaymentComplete" style="margin-bottom: 6px !important" (click)="downloadMyAdmission()">Download
-      Admission Card</button>
-    <div *ngIf="isStudentConfirmed && isStudentPaymentComplete" class="not-print">Admission form will be available for download after the 8th December.</div>
+
+    <button  type="button" class="btn btn-primary download-save-btn not-print" *ngIf="isStudentConfirmed && isStudentPaymentComplete && !isDeffered" style="margin-bottom: 6px !important" (click)="downloadMyAdmission()">Download Admission Card</button>
+    <!--<div *ngIf="isStudentConfirmed && isStudentPaymentComplete" class="not-print">Admission form will be available for download after the 8th December.</div> -->
+
+    <strong *ngIf="isDeffered" style="margin-bottom: 6px !important">Processing of your Application Form has been temporarily suspended. Please contact the Postgraduate Divison on 0112589123 for more information.</strong>
+    <!--<div *ngIf="isStudentConfirmed && isStudentPaymentComplete" class="not-print">Admission form will be available for download after the 8th December.</div>-->
 
   </section>
 
